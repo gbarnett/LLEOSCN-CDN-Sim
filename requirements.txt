@@ -3,7 +3,7 @@ python-igraph==0.8.3
 scipy==1.5.4
 PyAstronomy==0.15.2
 PyQt5==5.14.0
-vtk==8.1.2
+vtk
 scikit-build==0.11.1
 pandas==1.1.4
 tqdm==4.52.0

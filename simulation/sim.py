@@ -32,7 +32,7 @@ def simulate(steps, step_length, loc_file, result_file, load_file, city_file, re
 
     # constants
     # turning on animation is not recommended with more than 1 chunk
-    ANIMATE = False
+    ANIMATE = True 
 
     EARTH_RADIUS = 6371000
 

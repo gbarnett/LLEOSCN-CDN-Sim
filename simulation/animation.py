@@ -26,7 +26,6 @@ import multiprocessing as mp
 
 # custom classes
 from constellation import Constellation
-from network import Network
 
 # Primarily using the write_gml() function...
 import networkx as nx

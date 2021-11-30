@@ -12,7 +12,8 @@ sudo yum install libtool -y
 sudo yum install python-devel -y
 sudo yum install python3-devel -y
 sudo yum install gcc gcc-c++ byacc -y
-sudo yum install llvm -y
+sudo yum install llvm -y==8.1.2
+sudo yum install opencv opencv-devel opencv-python
 
 pip3 install --user -r ./requirements.txt
 

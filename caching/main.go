@@ -21,6 +21,7 @@ import (
 	"os"
 	"path"
 	"strconv"
+	"fmt"
 
 	"github.com/pelletier/go-toml"
 	"github.com/schollz/progressbar/v3"
@@ -28,7 +29,9 @@ import (
 
 func main() {
 
-	strategies := []string{"NONE"}//, "GROUND-STATION", "SATELLITE", "SATELLITE-TIMEOUT", "SATELLITE-VIRTUAL"}
+	// strategies := []string{"NONE"}//, "GROUND-STATION", "SATELLITE", "SATELLITE-TIMEOUT", "SATELLITE-VIRTUAL"}
+	strategies := []string{"SATELLITE"}//, "SATELLITE-TIMEOUT", "SATELLITE-VIRTUAL"}
+	fmt.Println("HERE")
 
 	maxClientsPerGST := []int64{10000, 100, 10}
 
@@ -81,7 +84,7 @@ func main() {
 
 	itemSizes := getItemSizes(loadFile)
 
-	C := make([]strategy, len(strategies)+len(maxClientsPerGST)-1)
+	C := make([]strategy, len(strategies))//+len(maxClientsPerGST)-1)
 
 	i := 0
 	for _, s := range strategies {
