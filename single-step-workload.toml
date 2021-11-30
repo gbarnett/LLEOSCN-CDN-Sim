@@ -16,5 +16,5 @@ min_item_size = 1000
 request_amount = 10
 
 # simulation time
-steps = 1 
+steps = 10
 step_length = 3600

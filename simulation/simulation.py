@@ -211,11 +211,14 @@ class Simulation():
                 "frequency": self.frequency
             }
 
+
             self.animation = mp.Process(target=Animation, kwargs=kw)
             self.animation.start()
 
             time.sleep(10)
+
             self.pipe_conn = parent_conn
+            self.pipe_conn.send(["in init"])
 
     def terminate(self):
         if self.animate:
@@ -280,14 +283,17 @@ class Simulation():
                 self.model.calculatePlusGridLinks(self.max_stg_distance)
 
         if self.animate:
-            self.pipe_conn.send(["sat_positions", self.model.getArrayOfSatPositions()])
-            self.pipe_conn.send(["gnd_positions", self.model.getArrayOfGndPositions()])
-            self.pipe_conn.send(["links", self.model.getArrayOfLinks()])
-            self.pipe_conn.send(["points",self.model.getArrayOfNodePositions()])
-            self.pipe_conn.send(["total_sats", self.model.total_sats])
-            self.pipe_conn.send(["enable_path_calculation",self.enable_path_calculation])
-            self.pipe_conn.send(["pause", self.pause])
-            self.pipe_conn.send(["current_simulation_time", new_time])
+            try:
+                self.pipe_conn.send(["sat_positions", self.model.getArrayOfSatPositions()])
+                self.pipe_conn.send(["gnd_positions", self.model.getArrayOfGndPositions()])
+                self.pipe_conn.send(["links", self.model.getArrayOfLinks()])
+                self.pipe_conn.send(["points",self.model.getArrayOfNodePositions()])
+                self.pipe_conn.send(["total_sats", self.model.total_sats])
+                self.pipe_conn.send(["enable_path_calculation",self.enable_path_calculation])
+                self.pipe_conn.send(["pause", self.pause])
+                self.pipe_conn.send(["current_simulation_time", new_time])
+            except BrokenPipeError:
+                print("Broken pipe")
 
         if self.enable_path_calculation:
 
@@ -385,10 +391,16 @@ class Simulation():
                     if path is not None:
                         self.path_links.append(path[0])
             
-                self.pipe_conn.send(["path_links",self.path_links])
+                try:
+                    self.pipe_conn.send(["path_links",self.path_links])
+                except BrokenPipeError:
+                    print("Broken pipe")
 
         self.current_simulation_time = new_time
         if self.animate:
-                self.pipe_conn.send(["current_simulation_time", self.current_simulation_time])
+                try:
+                    self.pipe_conn.send(["current_simulation_time", self.current_simulation_time])
+                except BrokenPipeError:
+                    print("Broken pipe")
         self.time_per_update = time.time() - time_1
             

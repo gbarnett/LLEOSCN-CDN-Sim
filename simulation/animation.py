@@ -368,15 +368,18 @@ class Animation():
 
         """
 
+        print("Making renderrer")
         # create a renderer object
         self.renderer = vtk.vtkRenderer()
         self.renderWindow = vtk.vtkRenderWindow()
         self.renderWindow.AddRenderer(self.renderer)
+        print("step 1")
 
         # create an interactor object, to interact with the window... duh
         self.interactor = vtk.vtkRenderWindowInteractor()
         self.interactor.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
         self.interactor.SetRenderWindow(self.renderWindow)
+        print("step 2")
 
         # add the actor objects
         self.renderer.AddActor(self.satsActor)
@@ -388,10 +391,12 @@ class Animation():
             self.renderer.AddActor(self.sglActor)
             self.renderer.AddActor(self.pathActor)
 
+        print("step 3")
         # white background, makes it easier to
         # put screenshots of animation into papers/presentations
         self.renderer.SetBackground(BACKGROUND_COLOR)
 
+        print("pre-initialize")
         self.interactor.Initialize()
         print('initialized interactor')
 
@@ -687,6 +692,7 @@ class Animation():
         """
         while True:
             received_data = self.pipe_conn.recv()
+            print(received_data)
             if type(received_data) == str:
                 print(received_data)
             elif type(received_data) == list:
@@ -715,3 +721,4 @@ class Animation():
 
             else:
                 print(received_data)
+        print("Control thread exiting.")

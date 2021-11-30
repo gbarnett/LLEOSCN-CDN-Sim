@@ -114,7 +114,7 @@ if __name__ == "__main__":
     p_list = []
 
     # leave one processor for other things
-    CHUNK_C = mp.cpu_count() - 1
+    CHUNK_C = 1 #mp.cpu_count() - 1
 
     for s in chunks(range(steps), CHUNK_C):
         kw = {
@@ -135,3 +135,4 @@ if __name__ == "__main__":
 
     for p in p_list:
         p.join()
+    print("Complete.")
