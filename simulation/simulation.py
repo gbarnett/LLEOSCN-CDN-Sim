@@ -260,6 +260,7 @@ class Simulation():
         time_1 = time.time()
 
         # grab initial time
+        # TODO could simplify? 
         if self.num_steps_to_run > 0:
             self.num_steps_to_run -= 1
         elif self.num_steps_to_run == 0:

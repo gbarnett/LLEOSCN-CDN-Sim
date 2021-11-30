@@ -500,7 +500,7 @@ class Constellation():
 
             edges.append([str(self.link_array[lnk_idx]["node_1"]), str(self.link_array[lnk_idx]["node_2"]), int(self.link_array[lnk_idx]["distance"])])
 
-        #print(edges)
+        print(edges)
 
         return ig.Graph.TupleList(edges, weights=True)
 

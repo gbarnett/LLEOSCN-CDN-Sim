@@ -36,14 +36,23 @@ The [dataset of US cell towers](./data/us_cell_towers.csv) is based on public do
 
 ## Usage
 
-### Installation (Amazon Linux 2)
-
+### Installation From Bare Amazon Linux 2 Micro Instance
+`sudo yum update -y`
+`sudo yum install git -y`
+`git clone <github URL>`
+`cd <repo name>`
 `sh ./install.sh`
+Append `export PATH=/usr/local/go/bin/:$PATH` to `~/.bash_profile`
 
 ### Generate Workload
 
 1. fill `workload.toml` (or choose one of the pre-configured workloads in the templates folder),
 2. then run `sh ./workload.sh workload.toml`
+
+Example:
+`cp templates/cell-lite.toml workload.toml`
+`sh ./workload.sh workload.toml`
+This example generates `workloads/workload-cell-lite`.
 
 ### Run Simulation
 
@@ -60,3 +69,6 @@ For performance reasons it is recommended to renice these processes to a nicenes
 ### Run analysis
 
 `sh ./analysis.sh workload.toml`
+
+### Debugging notes
+If process is killed, check `sudo cat /var/log/messages`

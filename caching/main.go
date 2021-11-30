@@ -28,7 +28,7 @@ import (
 
 func main() {
 
-	strategies := []string{"NONE", "GROUND-STATION", "SATELLITE", "SATELLITE-TIMEOUT", "SATELLITE-VIRTUAL"}
+	strategies := []string{"NONE"}//, "GROUND-STATION", "SATELLITE", "SATELLITE-TIMEOUT", "SATELLITE-VIRTUAL"}
 
 	maxClientsPerGST := []int64{10000, 100, 10}
 
